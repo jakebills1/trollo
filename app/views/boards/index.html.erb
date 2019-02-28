@@ -1,3 +1,5 @@
-<% @boards.each do |b| %>
-    <%=b.name%>
-<% end %>
+<div class="flex-container">
+    <% @boards.each do |b| %>
+        <div class="flex-item" id="square"><h3 class="ui header"><%= link_to b.name, board_path(b) %></h3></div>
+    <% end %>
+</div>
