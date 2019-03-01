@@ -1,2 +1,2 @@
-<h1>Boards#show</h1>
-<p>Find me in app/views/boards/show.html.erb</p>
+<%= button_to 'Rename Board', edit_board_path(@board), class: "ui button primary" %>
+<%= button_to 'Delete Board', board_path(@board), method: :delete, class: "ui button danger" %>

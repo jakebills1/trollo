@@ -1,5 +1,6 @@
 class Board < ApplicationRecord
   belongs_to :user
+  has_many :lists
 
   def self.all_boards(u_id)
     Board.find_by_sql(["
@@ -26,7 +27,7 @@ class Board < ApplicationRecord
     Board.find_by_sql(["
       UPDATE boards
       SET name = ?, updated_at = ?
-      WHERE boards_id = ?
+      WHERE boards.id = ?
       ", params[:name], DateTime.now, board_id
     ])
   end
@@ -38,6 +39,14 @@ class Board < ApplicationRecord
       WHERE boards.id = ? AND boards.user_id = ?
       ", board_id, u_id
     ]).first
+  end
+
+  def self.remove_record(id) 
+    Board.find_by_sql(["
+      DELETE FROM boards
+      WHERE boards.id = ?
+      ", id
+    ])
   end
 
 end
