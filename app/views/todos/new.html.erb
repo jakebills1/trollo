@@ -1,0 +1,7 @@
+<%= form_with(model: [@list, @todo], local: true, class: "ui form") do |f|%>
+    <div>
+        <%= f.label :desc %>
+        <%= f.text_field :desc %>
+    </div>
+    <%= f.submit nil, class: "ui button blue inverted" %>
+<% end %>

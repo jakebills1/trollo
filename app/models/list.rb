@@ -1,5 +1,6 @@
 class List < ApplicationRecord
   belongs_to :board
+  has_many :todos
 
   def self.single_list(board, id)
       List.find_by_sql(["

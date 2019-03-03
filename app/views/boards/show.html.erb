@@ -1,17 +1,24 @@
 <div class="ui cards">
     <% @board.lists.each do |list|%>
-        <div class="ui card">
+        <div class="ui card" >
             <div class="content">
                 <div class="header"><%= list.name %></div>
             </div>
             <div class="content">
                 <h4 class="ui sub header">Priority: <%= list.priority %></h4>
             </div>
+            <div class="content">
+                <div class=" ui list">
+                    <% list.todos.each do |todo| %>
+                        <div class="item"><%= todo.desc %></div>
+                    <% end %>
+                </div>
+            </div>
             <div class="extra content">
-                <div class="ui two buttons">
-
+                <div class="ui three buttons">
+                    <%= button_to "New Task", new_list_todo_path(list), method: :get, class: "ui mini button green inverted"	 %>
                     <%= button_to "Edit List", edit_board_list_path(@board, list), method: :get, class: "ui button blue inverted" %>
-                    <%= button_to 'Remove List', [@board, list], method: :delete, class: "ui button red inverted" %>
+                    <%= button_to 'Remove', [@board, list], method: :delete, class: "ui button red inverted" %>
                 </div>
             </div>
         </div>
@@ -19,7 +26,7 @@
 </div>
 
 
-<div class="ui three buttons ">
+<div class="ui three buttons" id="more-options">
     <%= button_to 'New list', new_board_list_path(@board), method: :get, class: "ui button primary inverted" %>
     <%= button_to 'Rename Board', edit_board_path(@board), method: :get, class: "ui button green inverted" %>
     <%= button_to 'Delete Board', board_path(@board), method: :delete, class: "ui button red inverted" %>
