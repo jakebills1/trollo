@@ -1,2 +1,23 @@
-<%= button_to 'Rename Board', edit_board_path(@board), class: "ui button primary" %>
-<%= button_to 'Delete Board', board_path(@board), method: :delete, class: "ui button danger" %>
+<div class="ui cards">
+    <% @board.lists.each do |list|%>
+        <div class="ui card">
+            <div class="content">
+                <div class="header"><%= list.name %></div>
+            </div>
+            <div class="extra content">
+                <div class="ui two buttons">
+
+                    <%= button_to "Edit List", edit_board_list_path(@board, list), method: :get, class: "ui button blue inverted" %>
+                    <%= button_to 'Remove List', [@board, list], method: :delete, class: "ui button red inverted" %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+
+<div class="ui three buttons ">
+    <%= button_to 'New list', new_board_list_path(@board), method: :get, class: "ui button primary inverted" %>
+    <%= button_to 'Rename Board', edit_board_path(@board), method: :get, class: "ui button green inverted" %>
+    <%= button_to 'Delete Board', board_path(@board), method: :delete, class: "ui button red inverted" %>
+</div>

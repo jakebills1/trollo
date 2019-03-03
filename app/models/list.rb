@@ -10,4 +10,12 @@ class List < ApplicationRecord
     ]).first
   end
 
+  def self.remove_record(id) 
+    List.find_by_sql(["
+      DELETE FROM lists
+      WHERE lists.id = ?
+      ", id
+    ])
+  end
+
 end

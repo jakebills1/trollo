@@ -17,7 +17,7 @@ class ListsController < ApplicationController
     @list = @board.lists.new(list_params)
 
     if @list.save
-      redirect_to lists_path
+      redirect_to @board
     else
       render :new
     end
@@ -28,15 +28,16 @@ class ListsController < ApplicationController
   end
 
   def update
-    if @list.update
-      redirect_to [@board, @list]
+    if @list.update(list_params)
+      redirect_to @board
     else
       render :edit
     end
   end
   
   def destroy
-    @list.remove_record(@list.id)
+    List.remove_record(@list.id)
+    redirect_to @board
   end
 
   private
@@ -49,7 +50,7 @@ class ListsController < ApplicationController
     end
 
     def list_params
-      params.require(:list).permit(:name)
+      params.require(:list).permit(:name, :priority)
     end
 
 end
