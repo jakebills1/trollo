@@ -8,9 +8,13 @@
                 <h4 class="ui sub header">Priority: <%= list.priority %></h4>
             </div>
             <div class="content">
-                <div class=" ui list">
+                <div class=" ui check list">
                     <% list.todos.each do |todo| %>
-                        <div class="item"><%= todo.desc %></div>
+                        <% if todo.complete? %>
+                            <div class="item"><del> <%= todo.desc %> </del></div>
+                        <% else %>
+                            <div class="item"> <%= link_to todo.desc, edit_list_todo_path(list, todo) %> </div>
+                        <% end %>
                     <% end %>
                 </div>
             </div>

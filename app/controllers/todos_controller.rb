@@ -24,6 +24,15 @@ class TodosController < ApplicationController
   def edit
   end
 
+  def update
+    if @todo.update(todo_params)
+      redirect_to board_path(@list.board_id)
+    else
+      render :edit
+    end
+  end
+
+
   private
     def set_list
       @list = List.find(params[:list_id])

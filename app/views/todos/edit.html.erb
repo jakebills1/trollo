@@ -1,2 +1,13 @@
-<h1>Todos#edit</h1>
-<p>Find me in app/views/todos/edit.html.erb</p>
+<%= form_with(model: [@list, @todo], local: true, class: "ui form") do |f|%>
+    <div>
+        <%= f.label :desc %>
+        <%= f.text_field :desc %>
+    </div>
+    <div class="ui checkbox">
+        <%= f.check_box :complete %>
+        <%= f.label :complete, "Check when complete" %>
+    </div>
+    <div>
+        <%= f.submit nil, class: "ui button blue inverted" %>
+    </div>
+<% end %>
