@@ -14,13 +14,8 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = @board.lists.new(list_params)
-
-    if @list.save
-      redirect_to @board
-    else
-      render :new
-    end
+    List.create_list(list_params, @board.id)
+    redirect_to @board
   end
 
   def edit
@@ -28,11 +23,9 @@ class ListsController < ApplicationController
   end
 
   def update
-    if @list.update(list_params)
-      redirect_to @board
-    else
-      render :edit
-    end
+    List.update_list(list_params, @list)
+
+    redirect_to @board
   end
   
   def destroy

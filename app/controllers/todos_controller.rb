@@ -2,7 +2,6 @@ class TodosController < ApplicationController
   before_action :set_list
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
   def index
-
   end
 
   def show
@@ -14,22 +13,17 @@ class TodosController < ApplicationController
 
   def create
     @todo = @list.todos.new(todo_params)
-    if @todo.save
-      redirect_to board_path(@list.board_id)
-    else
-      render :new
-    end
+
+    redirect_to board_path(@list.board_id)
   end
+    
 
   def edit
   end
 
   def update
-    if @todo.update(todo_params)
-      redirect_to board_path(@list.board_id)
-    else
-      render :edit
-    end
+    Todo.update_todo(todo_params, @todo)
+    redirect_to board_path(@list.board_id)
   end
 
 

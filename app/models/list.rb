@@ -29,4 +29,29 @@ class List < ApplicationRecord
     ])
   end
 
+  def self.create_list(params, b_id)
+    List.find_by_sql(["
+    INSERT INTO lists (name, priority, board_id, created_at, updated_at)
+    VALUES (:name, :priority, :board_id, :created_at, :updated_at);
+    ", {
+      name: params[:name],
+      priority: params[:priority],
+      board_id: b_id, 
+      created_at: DateTime.now,
+      updated_at: DateTime.now
+    }
+    ]).first
+  end
+
+  def self.update_list(params, id)
+    List.find_by_sql(["
+    UPDATE lists
+    SET name = ?, priority = ?, updated_at = ?
+    WHERE lists.id = ?
+    ", params[:name], params[:priority], DateTime.now, id
+    ])
+  end
+
+
+
 end
