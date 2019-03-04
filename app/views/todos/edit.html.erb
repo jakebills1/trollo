@@ -8,6 +8,10 @@
         <%= f.label :complete, "Check when complete" %>
     </div>
     <div>
+        <%# f.label :list_id, "Move to a different list?" %>
+        <%# f.select :list_id, @lists.collect { |l| [l.name, l.id]}, {prompt: "Select list"} %>
+    </div>
+    <div>
         <%= f.submit nil, class: "ui button blue inverted" %>
     </div>
 <% end %>

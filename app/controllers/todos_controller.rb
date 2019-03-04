@@ -14,7 +14,11 @@ class TodosController < ApplicationController
   def create
     @todo = @list.todos.new(todo_params)
 
-    redirect_to board_path(@list.board_id)
+    if @todo.save
+      redirect_to board_path(@list.board_id)
+    else
+      render :new
+    end
   end
     
 
@@ -22,8 +26,11 @@ class TodosController < ApplicationController
   end
 
   def update
-    Todo.update_todo(todo_params, @todo)
-    redirect_to board_path(@list.board_id)
+    if @todo.update(todo_params)
+      redirect_to board_path(@list.board_id)
+    else
+      render :edit
+    end
   end
 
 
@@ -37,6 +44,10 @@ class TodosController < ApplicationController
     end
 
     def todo_params
-      params.require(:todo).permit(:desc, :complete)
+      params.require(:todo).permit(:desc, :complete, :list_id)
+    end
+    
+    def all_lists
+      @lists = current_user.boards.lists.all
     end
 end
